@@ -18,7 +18,7 @@ app.use(express.json());
 app.use(cookieParser(""));
 app.use(
   cors({
-    origin: "https://lustrous-licorice-7211fc.netlify.app",
+    origin: "https://fantastic-bienenstitch-d65da0.netlify.app",
     methods: ["PUT", "GET", "DELETE", "POST"],
     credentials: true,
   })
@@ -27,7 +27,7 @@ app.use(
 app.use(function (req, res, next) {
   res.setHeader(
     "Access-Control-Allow-Origin",
-    "https://lustrous-licorice-7211fc.netlify.app"
+    "https://fantastic-bienenstitch-d65da0.netlify.app"
   );
   res.setHeader(
     "Access-Control-Allow-Methods",
