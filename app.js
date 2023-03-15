@@ -19,14 +19,14 @@ app.use(cookieParser(""));
 app.use(cors());
 app.use(router);
 
-app.use((req, res, next) => {
+app.options("/", (req, res) => {
   res.setHeader(
     "Access-Control-Allow-Origin",
     "https://amazonclonebackend.onrender.com"
   );
   res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-  next();
+  res.sendStatus(204);
 });
 
 const port = process.env.PORT || 8000;
