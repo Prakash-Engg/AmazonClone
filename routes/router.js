@@ -36,18 +36,15 @@ const months = [
 const year = 1000 * 60 * 60 * 24 * 365;
 
 // get productsdata API
-router.get(
-  "https://amazonclonebackend.onrender.com/getproducts",
-  async (req, res) => {
-    try {
-      const productsdata = await Products.find();
-      // console.log("API wala data hai: " + productsdata);
-      res.status(201).json(productsdata);
-    } catch (error) {
-      console.log("error" + error.message);
-    }
+router.get("/getproducts", async (req, res) => {
+  try {
+    const productsdata = await Products.find();
+    // console.log("API wala data hai: " + productsdata);
+    res.status(201).json(productsdata);
+  } catch (error) {
+    console.log("error" + error.message);
   }
-);
+});
 
 //get individual data here  we are creating api for individual data
 
