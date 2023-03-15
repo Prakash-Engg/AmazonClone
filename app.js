@@ -18,7 +18,7 @@ app.use(express.json());
 app.use(cookieParser(""));
 app.use(
   cors({
-    origin: "https://idyllic-strudel-90a591.netlify.app",
+    origin: "https://lustrous-licorice-7211fc.netlify.app",
     methods: ["PUT", "GET", "DELETE", "POST"],
     credentials: true,
   })
@@ -27,7 +27,7 @@ app.use(
 app.use(function (req, res, next) {
   res.setHeader(
     "Access-Control-Allow-Origin",
-    "https://idyllic-strudel-90a591.netlify.app"
+    "https://lustrous-licorice-7211fc.netlify.app"
   );
   res.setHeader(
     "Access-Control-Allow-Methods",
