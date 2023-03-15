@@ -16,18 +16,12 @@ const uuid = require("uuid").v4;
 
 app.use(express.json());
 app.use(cookieParser(""));
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://amazonclonebackend.onrender.com",
+  })
+);
 app.use(router);
-
-app.options("/", (req, res) => {
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-    "https://amazonclonebackend.onrender.com"
-  );
-  res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-  res.sendStatus(204);
-});
 
 const port = process.env.PORT || 8000;
 
