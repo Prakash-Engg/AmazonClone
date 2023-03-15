@@ -19,7 +19,7 @@ app.use(cookieParser(""));
 app.use(
   cors({
     origin: "https://idyllic-strudel-90a591.netlify.app",
-    methods: [PUT, GET, DELETE, POST],
+    methods: ["PUT", "GET", "DELETE", "POST"],
     credentials: true,
   })
 );
