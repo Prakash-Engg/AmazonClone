@@ -18,7 +18,7 @@ app.use(express.json());
 app.use(cookieParser(""));
 app.use(
   cors({
-    origin: "https://amazonclonebackend.onrender.com",
+    origin: "https://idyllic-strudel-90a591.netlify.app",
   })
 );
 app.use(router);
