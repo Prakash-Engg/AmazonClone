@@ -21,25 +21,9 @@ app.use(
     origin: "https://fantastic-bienenstitch-d65da0.netlify.app",
     methods: ["PUT", "GET", "DELETE", "POST"],
     credentials: true,
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
-
-app.use(function (req, res, next) {
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-    "https://fantastic-bienenstitch-d65da0.netlify.app"
-  );
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
-  );
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "X-Requested-With,content-type"
-  );
-  res.setHeader("Access-Control-Allow-Credentials", true);
-  next();
-});
 
 app.use(router);
 
