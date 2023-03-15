@@ -20,7 +20,7 @@ app.use(
   cors({
     origin: "https://lustrous-licorice-7211fc.netlify.app",
     methods: ["PUT", "GET", "DELETE", "POST"],
-    credentials: true,
+    // credentials: true,
   })
 );
 
@@ -37,7 +37,7 @@ app.use(function (req, res, next) {
     "Access-Control-Allow-Headers",
     "X-Requested-With,content-type"
   );
-  res.setHeader("Access-Control-Allow-Credentials", true);
+  // res.setHeader("Access-Control-Allow-Credentials", true);
   next();
 });
 
