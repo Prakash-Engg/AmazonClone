@@ -20,6 +20,7 @@ app.use(
   cors({
     origin: "https://idyllic-strudel-90a591.netlify.app",
     methods: [PUT, GET, DELETE, POST],
+    credentials: true,
   })
 );
 app.use(router);
