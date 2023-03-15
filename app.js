@@ -18,7 +18,7 @@ app.use(express.json());
 app.use(cookieParser(""));
 app.use(
   cors({
-    origin: "https://fantastic-bienenstitch-d65da0.netlify.app",
+    origin: "https://harmonious-gumdrop-dbcdf1.netlify.app",
     methods: ["PUT", "GET", "DELETE", "POST"],
     credentials: true,
     allowedHeaders: ["Content-Type", "Authorization"],
