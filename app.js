@@ -20,7 +20,7 @@ app.use(
   cors({
     origin: "https://lustrous-licorice-7211fc.netlify.app",
     methods: ["PUT", "GET", "DELETE", "POST"],
-    // credentials: true,
+    credentials: true,
   })
 );
 
