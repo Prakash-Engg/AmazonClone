@@ -21,7 +21,8 @@ app.use(
     origin: "https://harmonious-gumdrop-dbcdf1.netlify.app",
     methods: ["PUT", "GET", "DELETE", "POST"],
     credentials: true,
-    allowedHeaders: ["Content-Type", "Authorization"],
+    allowedHeaders: ["Content-Type", "Authorization", "application/json"],
+    // allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 
