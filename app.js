@@ -18,13 +18,20 @@ app.use(express.json());
 app.use(cookieParser(""));
 app.use(
   cors({
-    origin: "https://capable-vacherin-156e4b.netlify.app",
+    origin: "https://timely-lolly-3a7619.netlify.app",
     methods: ["PUT", "GET", "DELETE", "POST"],
     credentials: true,
-    allowedHeaders: ["Content-Type", "Authorization", "application/json"],
-    // allowedHeaders: ["Content-Type", "Authorization"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
+
+app.use((req, res, next) => {
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "https://timely-lolly-3a7619.netlify.app"
+  );
+  next();
+});
 
 app.use(router);
 
