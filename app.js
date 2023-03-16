@@ -18,7 +18,7 @@ app.use(express.json());
 app.use(cookieParser(""));
 app.use(
   cors({
-    origin: "https://harmonious-gumdrop-dbcdf1.netlify.app",
+    origin: "https://capable-vacherin-156e4b.netlify.app",
     methods: ["PUT", "GET", "DELETE", "POST"],
     credentials: true,
     allowedHeaders: ["Content-Type", "Authorization", "application/json"],
