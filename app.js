@@ -33,6 +33,8 @@ app.use((req, res, next) => {
   next();
 });
 
+axios.defaults.withCredentials = true;
+
 app.use(router);
 
 const port = process.env.PORT || 8000;
