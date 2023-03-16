@@ -19,7 +19,7 @@ app.use(express.json());
 app.use(cookieParser(""));
 app.use(
   cors({
-    origin: "https://timely-lolly-3a7619.netlify.app",
+    origin: "https://willowy-peony-f5224e.netlify.app",
     methods: ["PUT", "GET", "DELETE", "POST"],
     credentials: true,
     allowedHeaders: ["Content-Type", "Authorization"],
@@ -29,7 +29,7 @@ app.use(
 app.use((req, res, next) => {
   res.setHeader(
     "Access-Control-Allow-Origin",
-    "https://timely-lolly-3a7619.netlify.app"
+    "https://willowy-peony-f5224e.netlify.app"
   );
   next();
 });
