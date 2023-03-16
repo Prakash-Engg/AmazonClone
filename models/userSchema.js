@@ -68,12 +68,12 @@ userSchema.pre("save", async function (next) {
 
 userSchema.methods.generateAuthtoken = async function () {
   try {
-    let token = jwt.sign({ _id: this._id }, process.env.KEY); // can we use any other details as payload instead of _id
+    let token = jwt.sign({ _id: this._id }, process.env.SECRET_KEY); // can we use any other details as payload instead of _id
     this.tokens = this.tokens.concat({ token: token });
     await this.save();
     return token;
   } catch (error) {
-    console.log(error);
+    console.log("Error in userscheema line 76");
   }
 };
 

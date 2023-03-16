@@ -6,7 +6,8 @@ const USER = require("../models/userSchema");
 const authenticate = async (req, res, next) => {
   try {
     const token = req.cookies.Amazonweb; // this is cookie stored in token variable
-    const verifyToken = jwt.verify(token, process.env.KEY);
+    const verifyToken = jwt.verify(token, process.env.SECRET_KEY);
+    console.log("line no 10 uauthenticate.js");
     console.log(verifyToken);
 
     const rootUser = await USER.findOne({
@@ -28,7 +29,7 @@ const authenticate = async (req, res, next) => {
 
     next();
   } catch (error) {
-    res.status(401).send("Unauthorised user");
+    res.status(401).send(" Line no. 32 authenticate.js Unauthorised user");
     console.log(error);
   }
 };
