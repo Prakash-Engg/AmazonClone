@@ -116,23 +116,24 @@ router.post("/login", async (req, res) => {
 
       //token generation JWT
 
-      if (isMatch || userlogin.password === password) {
-        const token = await userlogin.generateAuthtoken();
-        // console.log(token);
+      const token = await userlogin.generateAuthtoken();
+      console.log(token);
 
-        res.cookie("Amazonweb", token, {
-          expires: new Date(Date.now() + 7200000),
-          httpOnly: true,
-        });
-
-        res.status(201).json(userlogin);
-      } else {
+      res.cookie("Amazonweb", token, {
+        expires: new Date(Date.now() + 7200000),
+        httpOnly: true,
+      });
+      if (!isMatch) {
         res.status(400).json({ error: "Password not matching" });
+      } else {
+        res.status(201).json(userlogin);
       }
     } else {
       res.status(400).json({ error: "User not registered" });
     }
-  } catch (error) {}
+  } catch (error) {
+    res.status(400).json({ error: "Invalid details" });
+  }
 });
 
 //adding data inTo cart API
