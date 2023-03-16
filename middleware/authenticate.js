@@ -1,13 +1,13 @@
 const jwt = require("jsonwebtoken");
 const USER = require("../models/userSchema");
-const secretKey = process.env.SECRET_KEY;
+const secretKey = process.env.JWT_SECRET;
 // this is a middleware function to authenticate users for each & every API which we pass as a 2nd parameter
 
 const authenticate = async (req, res, next) => {
   try {
-    const token = req.header("Authorization").replace("Bearer ", ""); // this is cookie stored in token variable
+    const token = req.cookies.Amazonweb; // this is cookie stored in token variable
     const verifyToken = jwt.verify(token, secretKey);
-    console.log("line no 10 authenticate.js");
+    console.log("line no 10 uauthenticate.js");
     console.log(verifyToken);
 
     const rootUser = await USER.findOne({

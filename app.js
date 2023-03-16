@@ -19,7 +19,7 @@ app.use(express.json());
 app.use(cookieParser(""));
 app.use(
   cors({
-    origin: "https://willowy-peony-f5224e.netlify.app",
+    origin: "https://splendorous-profiterole-0ab7d6.netlify.app",
     methods: ["PUT", "GET", "DELETE", "POST"],
     credentials: true,
     allowedHeaders: ["Content-Type", "Authorization"],
@@ -29,7 +29,7 @@ app.use(
 app.use((req, res, next) => {
   res.setHeader(
     "Access-Control-Allow-Origin",
-    "https://willowy-peony-f5224e.netlify.app"
+    "https://splendorous-profiterole-0ab7d6.netlify.app"
   );
   next();
 });
