@@ -19,7 +19,7 @@ app.use(express.json());
 app.use(cookieParser(""));
 app.use(
   cors({
-    origin: "https://endearing-faun-cf3057.netlify.app",
+    origin: "https://serene-conkies-c4c250.netlify.app",
     methods: ["PUT", "GET", "DELETE", "POST"],
     credentials: true,
     allowedHeaders: ["Content-Type", "Authorization"],
@@ -29,7 +29,7 @@ app.use(
 app.use((req, res, next) => {
   res.setHeader(
     "Access-Control-Allow-Origin",
-    "https://endearing-faun-cf3057.netlify.app"
+    "https://serene-conkies-c4c250.netlify.app"
   );
   next();
 });
