@@ -112,16 +112,21 @@ router.post("/register", async (req, res) => {
 
 //login user API
 
+const express = require("express");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const router = express.Router();
+
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
     res.status(400).json({ error: "All fields are mandatory" });
+    return;
   }
 
   try {
     const userlogin = await USER.findOne({ email: email });
-    // console.log(userlogin);
 
     if (userlogin && (await bcrypt.compare(password, userlogin.password))) {
       const token = jwt.sign(
@@ -133,12 +138,45 @@ router.post("/login", async (req, res) => {
       );
       userlogin.token = token;
       res.status(201).json(userlogin);
+      return;
     }
+
     res.status(400).json({ error: "Invalid Credentials" });
   } catch (err) {
     console.log(`line139 router.js ${err}`);
+    res.status(500).json({ error: "Internal server error" });
   }
 });
+
+module.exports = router;
+
+// router.post("/login", async (req, res) => {
+//   const { email, password } = req.body;
+
+//   if (!email || !password) {
+//     res.status(400).json({ error: "All fields are mandatory" });
+//   }
+
+//   try {
+//     const userlogin = await USER.findOne({ email: email });
+//     // console.log(userlogin);
+
+//     if (userlogin && (await bcrypt.compare(password, userlogin.password))) {
+//       const token = jwt.sign(
+//         { userlogin_id: userlogin._id, email },
+//         process.env.JWT_SECRET,
+//         {
+//           expiresIn: "1h",
+//         }
+//       );
+//       userlogin.token = token;
+//       res.status(201).json(userlogin);
+//     }
+//     res.status(400).json({ error: "Invalid Credentials" });
+//   } catch (err) {
+//     console.log(`line139 router.js ${err}`);
+//   }
+// });
 // if (userlogin) {
 //   const isMatch = await bcrypt.compare(password, userlogin.password);
 //   // console.log(isMatch);
