@@ -5,6 +5,8 @@ const USER = require("../models/userSchema");
 const bcrypt = require("bcryptjs");
 const authenticate = require("../middleware/authenticate");
 const jwt = require("jsonwebtoken");
+const cookieParser = require("cookie-parser");
+app.use(cookieParser(""));
 
 const stripe = require("stripe")(
   "sk_test_51MZsumSA098kyG9410SpHIxmiWujwPqHMWG8DfYTwBw3qpUiXWzVpurbGrdGARltOkBw67qw7oCmVPOlP8Ke4BjL00m9RanAPF"
