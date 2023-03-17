@@ -18,11 +18,14 @@ const authenticate = async (req, res, next) => {
     const decoded = jwt.verify(token, config.JWT_SECRET);
     console.log(decoded);
     req.user = decoded;
+    console.log("line21 auth");
     req.token = token;
+    console.log("line23 auth");
     req.rootUser = await User.findOne({
       _id: decoded._id,
     });
-
+    console.log("line 27 auth");
+    console.log(req.rootUser);
     if (!req.rootUser) {
       throw new Error();
     }
