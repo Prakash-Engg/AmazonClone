@@ -38,11 +38,9 @@ const userSchema = new mongoose.Schema({
     unique: true,
     minlength: 6,
   },
-  token: [
-    {
-      type: String,
-    },
-  ],
+  token: {
+    type: String,
+  },
   carts: Array,
   orders: Array,
 });
