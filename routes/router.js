@@ -223,6 +223,12 @@ router.post("/addcart/:id", authenticate, async (req, res) => {
   }
 });
 
+//test api for authentication middleware
+
+router.post("/welcome", authenticate, (req, res) => {
+  res.status(200).send("Welcome");
+});
+
 //get cart details API
 
 router.get("/cartdetails", authenticate, async (req, res) => {
