@@ -20,7 +20,7 @@ const authenticate = async (req, res, next) => {
     req.token = token;
     req.rootUser = await User.findOne({
       _id: decoded._id,
-      token: token,
+      token: decoded.token,
     });
     if (!req.rootUser) {
       throw new Error();
