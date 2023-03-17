@@ -132,9 +132,8 @@ router.post("/login", async (req, res) => {
 
         res.cookie("Amazonweb", token, {
           expires: new Date(Date.now() + 2589000),
-          httpOnly: false, // cookie is accessible via client-side JavaScript
-          secure: true, // cookie will only be sent over HTTPS
-          sameSite: "strict", // cookie will only be sent for same-site requests
+          httpOnly: false, // cookie is accessible via client-side JavaScript // cookie will only be sent over HTTPS
+          // cookie will only be sent for same-site requests
         });
         res.status(201).json(userlogin);
       }
