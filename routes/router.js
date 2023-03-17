@@ -149,7 +149,7 @@ router.post("/login", async (req, res) => {
 
 //adding data inTo cart API
 
-router.post("/addcart/:id", authenicate, async (req, res) => {
+router.post("/addcart/:id", authenticate, async (req, res) => {
   try {
     console.log("perfect 6");
     const { id } = req.params;
@@ -174,7 +174,7 @@ router.post("/addcart/:id", authenicate, async (req, res) => {
 
 //get cart details API
 
-router.get("/cartdetails", authenicate, async (req, res) => {
+router.get("/cartdetails", authenticate, async (req, res) => {
   try {
     const buyuser = await User.findOne({ _id: req.userID });
     console.log(buyuser + "user hain buy pr");
@@ -186,7 +186,7 @@ router.get("/cartdetails", authenicate, async (req, res) => {
 
 //get valid user
 
-router.get("/validuser", authenicate, async (req, res) => {
+router.get("/validuser", authenticate, async (req, res) => {
   try {
     const validuserone = await User.findOne({ _id: req.userID });
     console.log(validuserone + "user hain home k header main pr");
@@ -217,7 +217,7 @@ router.delete("/removeItem/:id", authenticate, async (req, res) => {
 
 //Log out API
 
-router.get("/logout", authenicate, async (req, res) => {
+router.get("/logout", authenticate, async (req, res) => {
   try {
     req.rootUser.tokens = req.rootUser.tokens.filter((curelem) => {
       return curelem.token !== req.token;
