@@ -143,60 +143,6 @@ router.post("/login", async (req, res) => {
 
 module.exports = router;
 
-// router.post("/login", async (req, res) => {
-//   const { email, password } = req.body;
-
-//   if (!email || !password) {
-//     res.status(400).json({ error: "All fields are mandatory" });
-//   }
-
-//   try {
-//     const userlogin = await USER.findOne({ email: email });
-//     // console.log(userlogin);
-
-//     if (userlogin && (await bcrypt.compare(password, userlogin.password))) {
-//       const token = jwt.sign(
-//         { userlogin_id: userlogin._id, email },
-//         process.env.JWT_SECRET,
-//         {
-//           expiresIn: "1h",
-//         }
-//       );
-//       userlogin.token = token;
-//       res.status(201).json(userlogin);
-//     }
-//     res.status(400).json({ error: "Invalid Credentials" });
-//   } catch (err) {
-//     console.log(`line139 router.js ${err}`);
-//   }
-// });
-// if (userlogin) {
-//   const isMatch = await bcrypt.compare(password, userlogin.password);
-//   // console.log(isMatch);
-//   // console.log(userlogin.password === password);
-
-//   //token generation JWT
-
-//   const token = await userlogin.generateAuthtoken();
-//   console.log(token);
-
-//   res.cookie("Amazonweb", token, {
-//     expires: new Date(Date.now() + 7200000),
-//     httpOnly: true,
-//   });
-//   if (!isMatch) {
-//     res.status(400).json({ error: "Password not matching" });
-//   } else {
-//     res.status(201).json(userlogin);
-//   }
-// } else {
-//   res.status(400).json({ error: "User not registered" });
-// }
-//   } catch (error) {
-//     res.status(400).json({ error: "Invalid details" });
-//   }
-// });
-
 //adding data inTo cart API
 
 router.post("/addcart/:id", authenticate, async (req, res) => {
@@ -234,7 +180,7 @@ router.get("/cartdetails", authenticate, async (req, res) => {
     const buyUser = await USER.findOne({ _id: req.userID });
     res.status(201).json(buyUser);
   } catch (error) {
-    console.log("error" + error);
+    console.log("line183 router.js" + error);
   }
 });
 
