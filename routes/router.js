@@ -92,20 +92,22 @@ router.post("/register", async (req, res) => {
       //jwt authentication
 
       const token = jwt.sign(
-        { _id: finalUser._id, email },
+        { finalUser_id: finalUser._id, email },
         process.env.JWT_SECRET,
         {
           expiresIn: "1h",
         }
       );
-      finalUser.tokens.push = { token: token };
+      finalUser.token = token;
 
       const storedata = await finalUser.save();
       console.log(`Line104 router.js ${storedata} `);
 
       res.status(201).json(storedata);
     }
-  } catch (error) {}
+  } catch (error) {
+    console.log(`Line109 router.js ${err}`);
+  }
 });
 
 //login user API
