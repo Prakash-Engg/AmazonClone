@@ -9,6 +9,7 @@ const authenticate = async (req, res, next) => {
     req.query.token ||
     req.params.token ||
     req.headers["x-access-token"];
+  console.log(`line12 router.js ${token}`);
 
   if (!token) {
     return res.status(403).send("A token is required for authentication");
@@ -19,7 +20,7 @@ const authenticate = async (req, res, next) => {
     req.token = token;
     req.rootUser = await User.findOne({
       _id: decoded._id,
-      "tokens.token": token,
+      token: token,
     });
     if (!req.rootUser) {
       throw new Error();

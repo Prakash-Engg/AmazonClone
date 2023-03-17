@@ -133,7 +133,7 @@ router.post("/login", async (req, res) => {
       );
       userlogin.token = token;
       res.status(201).json(userlogin);
-      console.log("line141 router.js All good");
+      console.log("line136 router.js All good");
       return;
     }
 
@@ -226,7 +226,7 @@ router.post("/addcart/:id", authenticate, async (req, res) => {
 //test api for authentication middleware
 
 router.get("/welcome", authenticate, (req, res) => {
-  res.status(200).send("Welcome");
+  res.send("Welcome");
 });
 
 //get cart details API
