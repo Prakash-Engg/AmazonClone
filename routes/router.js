@@ -78,7 +78,7 @@ router.post("/register", async (req, res) => {
   }
 
   try {
-    const preuser = await User.findOne({ email: email });
+    const preuser = await USER.findOne({ email: email });
 
     if (preuser) {
       res.status(422).json({ error: "This email is already exist" });
@@ -118,7 +118,7 @@ router.post("/login", async (req, res) => {
   }
 
   try {
-    const userlogin = await User.findOne({ email: email });
+    const userlogin = await USER.findOne({ email: email });
     console.log(userlogin);
     if (userlogin) {
       const isMatch = await bcrypt.compare(password, userlogin.password);
@@ -153,7 +153,7 @@ router.post("/addcart/:id", authenticate, async (req, res) => {
   try {
     console.log("perfect 6");
     const { id } = req.params;
-    const cart = await products.findOne({ id: id });
+    const cart = await Products.findOne({ id: id });
     console.log(cart + "cart milta hain");
 
     const Usercontact = await User.findOne({ _id: req.userID });
@@ -176,7 +176,7 @@ router.post("/addcart/:id", authenticate, async (req, res) => {
 
 router.get("/cartdetails", authenticate, async (req, res) => {
   try {
-    const buyuser = await User.findOne({ _id: req.userID });
+    const buyuser = await USER.findOne({ _id: req.userID });
     console.log(buyuser + "user hain buy pr");
     res.status(201).json(buyuser);
   } catch (error) {
@@ -188,7 +188,7 @@ router.get("/cartdetails", authenticate, async (req, res) => {
 
 router.get("/validuser", authenticate, async (req, res) => {
   try {
-    const validuserone = await User.findOne({ _id: req.userID });
+    const validuserone = await USER.findOne({ _id: req.userID });
     console.log(validuserone + "user hain home k header main pr");
     res.status(201).json(validuserone);
   } catch (error) {
@@ -223,7 +223,7 @@ router.get("/logout", authenticate, async (req, res) => {
       return curelem.token !== req.token;
     });
 
-    res.clearCookie("eccomerce", { path: "/" });
+    res.clearCookie("Amazonweb", { path: "/" });
     req.rootUser.save();
     res.status(201).json(req.rootUser.tokens);
     console.log("user logout");
