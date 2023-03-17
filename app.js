@@ -19,7 +19,7 @@ app.use(express.json());
 app.use(cookieParser(""));
 app.use(
   cors({
-    origin: "https://splendorous-profiterole-0ab7d6.netlify.app",
+    origin: "https://moonlit-axolotl-188f85.netlify.app",
     methods: ["PUT", "GET", "DELETE", "POST"],
     credentials: true,
     allowedHeaders: ["Content-Type", "Authorization"],
@@ -29,7 +29,7 @@ app.use(
 app.use((req, res, next) => {
   res.setHeader(
     "Access-Control-Allow-Origin",
-    "https://splendorous-profiterole-0ab7d6.netlify.app"
+    "https://moonlit-axolotl-188f85.netlify.app"
   );
   next();
 });
