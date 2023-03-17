@@ -1,8 +1,7 @@
 const jwt = require("jsonwebtoken");
 const USER = require("../models/userSchema");
-const cookieParser = require("cookie-parser");
 const secretKey = process.env.KEY;
-app.use(cookieParser(""));
+
 // this is a middleware function to authenticate users for each & every API which we pass as a 2nd parameter
 
 const authenticate = async (req, res, next) => {
