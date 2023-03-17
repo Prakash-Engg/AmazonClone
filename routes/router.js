@@ -138,6 +138,7 @@ router.post("/login", async (req, res) => {
       );
       userlogin.token = token;
       res.status(201).json(userlogin);
+      console.log("line141 router.js All good");
       return;
     }
 
