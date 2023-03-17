@@ -225,7 +225,7 @@ router.post("/addcart/:id", authenticate, async (req, res) => {
 
 //test api for authentication middleware
 
-router.post("/welcome", authenticate, (req, res) => {
+router.get("/welcome", authenticate, (req, res) => {
   res.status(200).send("Welcome");
 });
 
