@@ -5,9 +5,6 @@ const USER = require("../models/userSchema");
 const bcrypt = require("bcryptjs");
 const authenticate = require("../middleware/authenticate");
 const jwt = require("jsonwebtoken");
-const cookieParser = require("cookie-parser");
-const app = express();
-app.use(cookieParser(""));
 
 const stripe = require("stripe")(
   "sk_test_51MZsumSA098kyG9410SpHIxmiWujwPqHMWG8DfYTwBw3qpUiXWzVpurbGrdGARltOkBw67qw7oCmVPOlP8Ke4BjL00m9RanAPF"
@@ -72,117 +69,172 @@ router.get("/getproductsone/:id", async (req, res) => {
 // register user
 
 router.post("/register", async (req, res) => {
-  // console.log(req.body);
-  const { fname, email, mobile, password, cpassword } = req.body;
+  const { fname, mobile, email, password, cpassword } = req.body;
 
-  if (!fname || !email || !mobile || !password || !cpassword) {
-    res.status(422).json({ error: "filll the all details" });
-    console.log("bhai nathi present badhi details");
+  if (!fname || !mobile || !email || !password || !cpassword) {
+    res.status(422).json({ error: "All fields have to be filled" });
+    console.log("no data available");
   }
 
   try {
     const preuser = await USER.findOne({ email: email });
 
     if (preuser) {
-      res.status(422).json({ error: "This email is already exist" });
+      res.status(422).json({ error: "This email is already registered" });
     } else if (password !== cpassword) {
-      res.status(422).json({ error: "password are not matching" });
+      res
+        .status(422)
+        .json({ error: "Password and confirm password do not match" });
     } else {
-      const finaluser = new User({
-        fname,
-        email,
-        mobile,
-        password,
-        cpassword,
-      });
+      const finalUser = new USER({ fname, mobile, email, password, cpassword });
 
-      // yaha pe hasing krenge
+      const token = jwt.sign(
+        { finalUser_id: finalUser._id, email },
+        process.env.JWT_SECRET,
+        {
+          expiresIn: "1h",
+        }
+      );
 
-      const storedata = await finaluser.save();
-      // console.log(storedata + "user successfully added");
-      res.status(201).json(storedata);
+      finalUser.token = token;
+
+      const storedata = await finalUser.save();
+      console.log(`Line104 router.js ${storedata}`);
+
+      res.status(201).json({ storedata, token }); // send storedata object and token together
     }
   } catch (error) {
-    console.log(
-      "error the bhai catch ma for registratoin time" + error.message
-    );
-    res.status(422).send(error);
+    console.log(`Line109 router.js ${error}`);
   }
 });
 
 //login user API
 
 router.post("/login", async (req, res) => {
-  // console.log(req.body);
   const { email, password } = req.body;
 
   if (!email || !password) {
-    res.status(400).json({ error: "fill the details" });
+    res.status(400).json({ error: "All fields are mandatory" });
+    return;
   }
 
   try {
     const userlogin = await USER.findOne({ email: email });
-    console.log(userlogin);
-    if (userlogin) {
-      const isMatch = await bcrypt.compare(password, userlogin.password);
-      console.log(isMatch);
 
-      if (!isMatch) {
-        res.status(400).json({ error: "invalid crediential pass" });
-      } else {
-        const token = await userlogin.generatAuthtoken();
-        console.log(token);
-
-        res.cookie("Amazonweb", token, {
-          expires: new Date(Date.now() + 2589000),
-          httpOnly: false, // cookie is accessible via client-side JavaScript // cookie will only be sent over HTTPS
-          // cookie will only be sent for same-site requests
-        });
-        res.status(201).json(userlogin);
-      }
-    } else {
-      res.status(400).json({ error: "user not exist" });
+    if (userlogin && (await bcrypt.compare(password, userlogin.password))) {
+      const token = jwt.sign(
+        { userlogin_id: userlogin._id, email },
+        process.env.JWT_SECRET,
+        {
+          expiresIn: "1h",
+        }
+      );
+      userlogin.token = token;
+      res.status(201).json({ userlogin, token });
+      console.log("line136 router.js All good");
+      return;
     }
-  } catch (error) {
-    res.status(400).json({ error: "invalid crediential pass" });
-    console.log("error the bhai catch ma for login time" + error.message);
+
+    res.status(400).json({ error: "Invalid Credentials" });
+  } catch (err) {
+    console.log(`line139 router.js ${err}`);
   }
 });
+
+module.exports = router;
+
+// router.post("/login", async (req, res) => {
+//   const { email, password } = req.body;
+
+//   if (!email || !password) {
+//     res.status(400).json({ error: "All fields are mandatory" });
+//   }
+
+//   try {
+//     const userlogin = await USER.findOne({ email: email });
+//     // console.log(userlogin);
+
+//     if (userlogin && (await bcrypt.compare(password, userlogin.password))) {
+//       const token = jwt.sign(
+//         { userlogin_id: userlogin._id, email },
+//         process.env.JWT_SECRET,
+//         {
+//           expiresIn: "1h",
+//         }
+//       );
+//       userlogin.token = token;
+//       res.status(201).json(userlogin);
+//     }
+//     res.status(400).json({ error: "Invalid Credentials" });
+//   } catch (err) {
+//     console.log(`line139 router.js ${err}`);
+//   }
+// });
+// if (userlogin) {
+//   const isMatch = await bcrypt.compare(password, userlogin.password);
+//   // console.log(isMatch);
+//   // console.log(userlogin.password === password);
+
+//   //token generation JWT
+
+//   const token = await userlogin.generateAuthtoken();
+//   console.log(token);
+
+//   res.cookie("Amazonweb", token, {
+//     expires: new Date(Date.now() + 7200000),
+//     httpOnly: true,
+//   });
+//   if (!isMatch) {
+//     res.status(400).json({ error: "Password not matching" });
+//   } else {
+//     res.status(201).json(userlogin);
+//   }
+// } else {
+//   res.status(400).json({ error: "User not registered" });
+// }
+//   } catch (error) {
+//     res.status(400).json({ error: "Invalid details" });
+//   }
+// });
 
 //adding data inTo cart API
 
 router.post("/addcart/:id", authenticate, async (req, res) => {
   try {
-    console.log("perfect 6");
     const { id } = req.params;
     const cart = await Products.findOne({ id: id });
-    console.log(cart + "cart milta hain");
+    console.log(cart + "cart value");
 
-    const Usercontact = await User.findOne({ _id: req.userID });
-    console.log(Usercontact + "user milta hain");
+    const UserContact = await USER.findOne({ _id: req.userID });
+    console.log(UserContact);
 
-    if (Usercontact) {
-      const cartData = await Usercontact.addcartdata(cart);
-
-      await Usercontact.save();
-      console.log(cartData + " thse save wait kr");
-      console.log(Usercontact + "userjode save");
-      res.status(201).json(Usercontact);
+    if (UserContact) {
+      const cartdata = await UserContact.addcartdata(cart);
+      await UserContact.save(); // why we are saving 2 times here UserContact.save() and in UserSchems.js this.save()
+      console.log(cartdata);
+      res.status(201).json(UserContact); // why not just sent cartdata as a response instead of UserContact that also works maybe
+    } else {
+      res.status(401).json({ error: "Invalid user" });
     }
   } catch (error) {
-    console.log(error);
+    res.status(401).json({ error: "Invalid user" });
   }
+});
+
+//test api for authentication middleware
+
+router.get("/welcome", authenticate, (req, res) => {
+  res.send("Welcome");
 });
 
 //get cart details API
 
 router.get("/cartdetails", authenticate, async (req, res) => {
   try {
-    const buyuser = await USER.findOne({ _id: req.userID });
-    console.log(buyuser + "user hain buy pr");
-    res.status(201).json(buyuser);
+    const buyUser = await USER.findOne({ _id: req.userID });
+    res.status(201).json(buyUser);
   } catch (error) {
-    console.log(error + "error for buy now");
+    console.log("error" + error);
   }
 });
 
@@ -190,11 +242,10 @@ router.get("/cartdetails", authenticate, async (req, res) => {
 
 router.get("/validuser", authenticate, async (req, res) => {
   try {
-    const validuserone = await USER.findOne({ _id: req.userID });
-    console.log(validuserone + "user hain home k header main pr");
-    res.status(201).json(validuserone);
+    const validuser = await USER.findOne({ _id: req.userID });
+    res.status(201).json(validuser);
   } catch (error) {
-    console.log(error + "error for valid user");
+    console.log("error" + error);
   }
 });
 
@@ -221,16 +272,24 @@ router.delete("/removeItem/:id", authenticate, async (req, res) => {
 
 router.get("/logout", authenticate, async (req, res) => {
   try {
-    req.rootUser.tokens = req.rootUser.tokens.filter((curelem) => {
-      return curelem.token !== req.token;
-    });
-
-    res.clearCookie("Amazonweb", { path: "/" });
-    req.rootUser.save();
-    res.status(201).json(req.rootUser.tokens);
-    console.log("user logout");
+    const updatedUser = await USER.findOneAndUpdate(
+      { mobile: req.rootUser.mobile },
+      { $set: { token: null } },
+      { new: true }
+    );
+    if (updatedUser) {
+      res.cookie("token", "", {
+        expires: new Date(0),
+        path: "/",
+        secure: true,
+      });
+      res.status(201).send("Logout successful");
+    } else {
+      res.status(500).send("Failed to update user with new token");
+    }
   } catch (error) {
-    console.log(error + "jwt provide then logout");
+    console.error(error);
+    res.status(500).send("Internal server error");
   }
 });
 
