@@ -22,7 +22,7 @@ const authenticate = async (req, res, next) => {
     req.token = token;
     console.log("line23 auth");
     req.rootUser = await User.findOne({
-      _id: decoded._id,
+      _id: decoded.userlogin_id,
     });
     console.log("line 27 auth");
     console.log(req.rootUser);
