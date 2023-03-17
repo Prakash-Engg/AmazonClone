@@ -19,7 +19,7 @@ app.use(express.json());
 app.use(cookieParser(""));
 app.use(
   cors({
-    origin: "https://splendid-kulfi-436428.netlify.app",
+    origin: "https://endearing-faun-cf3057.netlify.app",
     methods: ["PUT", "GET", "DELETE", "POST"],
     credentials: true,
     allowedHeaders: ["Content-Type", "Authorization"],
@@ -29,7 +29,7 @@ app.use(
 app.use((req, res, next) => {
   res.setHeader(
     "Access-Control-Allow-Origin",
-    "https://splendid-kulfi-436428.netlify.app"
+    "https://endearing-faun-cf3057.netlify.app"
   );
   next();
 });

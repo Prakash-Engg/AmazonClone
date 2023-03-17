@@ -4,11 +4,19 @@ const USER = require("../models/userSchema");
 const config = process.env;
 
 const authenticate = async (req, res, next) => {
+  // Modified to check for token in multiple sources
   const token =
     req.body.token ||
     req.query.token ||
     req.params.token ||
+    req.headers.authorization ||
     req.headers["x-access-token"];
+  // Added check for Authorization header
+  if (req.headers.authorization) {
+    // Modified to extract token from Authorization header
+    const authHeader = req.headers.authorization;
+    const token = authHeader.split(" ")[1];
+  }
   console.log(`line12 router.js ${token}`);
 
   if (!token) {
@@ -36,35 +44,5 @@ const authenticate = async (req, res, next) => {
   }
   return next();
 };
-
-//   try {
-//     const token = req.cookies.Amazonweb; // this is cookie stored in token variable
-//     const verifyToken = jwt.verify(token, secretKey);
-//     console.log("line no 10 uauthenticate.js");
-//     console.log(verifyToken);
-
-//     const rootUser = await USER.findOne({
-//       _id: verifyToken._id,
-//       "tokens.token": token,
-//     });
-//     console.log(rootUser);
-
-//     if (!rootUser) {
-//       throw new Error("user not found");
-//     }
-
-//     req.token = token;
-//     req.rootUser = rootUser;
-//     req.userID = rootUser._id;
-
-//     // why not just sent req.rootUser = rootUser and using
-//     // that gets the access to req.rootUser_id or req.rootUser.cart or any other field data
-
-//     next();
-//   } catch (error) {
-//     res.status(401).send(" Line no. 32 authenticate.js Unauthorised user");
-//     console.log(error);
-//   }
-// };
 
 module.exports = authenticate;
