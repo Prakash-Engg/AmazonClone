@@ -6,6 +6,7 @@ const bcrypt = require("bcryptjs");
 const authenticate = require("../middleware/authenticate");
 const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
+const app = express();
 app.use(cookieParser(""));
 
 const stripe = require("stripe")(
