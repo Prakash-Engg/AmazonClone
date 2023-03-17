@@ -145,7 +145,6 @@ router.post("/login", async (req, res) => {
     res.status(400).json({ error: "Invalid Credentials" });
   } catch (err) {
     console.log(`line139 router.js ${err}`);
-    res.status(500).json({ error: "Internal server error" });
   }
 });
 
