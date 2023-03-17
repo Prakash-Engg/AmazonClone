@@ -98,7 +98,7 @@ router.post("/register", async (req, res) => {
           expiresIn: "1h",
         }
       );
-      finalUser.tokens.push = token;
+      finalUser.tokens.push = { token: token };
 
       const storedata = await finalUser.save();
       console.log(`Line104 router.js ${storedata} `);
