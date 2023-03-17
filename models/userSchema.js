@@ -62,16 +62,16 @@ userSchema.pre("save", async function (next) {
 //     to the user details because it is to update/add
 //     data after a document is added to the collection
 
-userSchema.methods.generateAuthtoken = async function () {
-  try {
-    let token = jwt.sign({ _id: this._id }, secretKey); // can we use any other details as payload instead of _id
-    this.tokens = this.tokens.concat({ token: token });
-    await this.save();
-    return token;
-  } catch (error) {
-    console.log("Error in userscheema line 76");
-  }
-};
+// userSchema.methods.generateAuthtoken = async function () {
+//   try {
+//     let token = jwt.sign({ _id: this._id }, secretKey); // can we use any other details as payload instead of _id
+//     this.tokens = this.tokens.concat({ token: token });
+//     await this.save();
+//     return token;
+//   } catch (error) {
+//     console.log("Error in userscheema line 76");
+//   }
+// };
 
 //add to cart data
 
