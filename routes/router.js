@@ -4,6 +4,7 @@ const Products = require("../models/productsSchema");
 const USER = require("../models/userSchema");
 const bcrypt = require("bcryptjs");
 const authenticate = require("../middleware/authenticate");
+const jwt = require("jsonwebtoken");
 
 const stripe = require("stripe")(
   "sk_test_51MZsumSA098kyG9410SpHIxmiWujwPqHMWG8DfYTwBw3qpUiXWzVpurbGrdGARltOkBw67qw7oCmVPOlP8Ke4BjL00m9RanAPF"
@@ -88,8 +89,19 @@ router.post("/register", async (req, res) => {
     } else {
       const finalUser = new USER({ fname, mobile, email, password, cpassword });
 
+      //jwt authentication
+
+      const token = jwt.sign(
+        { _id: finalUser._id, email },
+        process.env.JWT_SECRET,
+        {
+          expiresIn: "1h",
+        }
+      );
+      finalUser.tokens.token = token;
+
       const storedata = await finalUser.save();
-      console.log(storedata);
+      console.log(`Line104 router.js ${storedata} `);
 
       res.status(201).json(storedata);
     }
