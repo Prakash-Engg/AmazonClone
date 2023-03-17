@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 const USER = require("../models/userSchema");
 // this is a middleware function to authenticate users for each & every API which we pass as a 2nd parameter
+const config = process.env;
 
 const authenticate = async (req, res, next) => {
   const token =
@@ -13,7 +14,7 @@ const authenticate = async (req, res, next) => {
     return res.status(403).send("A token is required for authentication");
   }
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const decoded = jwt.verify(token, config.JWT_SECRET);
     req.user = decoded;
     req.token = token;
     req.rootUser = await User.findOne({
