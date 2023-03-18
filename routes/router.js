@@ -219,23 +219,23 @@ router.delete("/removeItem/:id", authenticate, async (req, res) => {
 router.get("/logout", authenticate, async (req, res) => {
   try {
     const updatedUser = await USER.findOneAndUpdate(
-      { mobile: req.rootUser.mobile },
+      { _id: req.userID },
       { $set: { token: null } },
       { new: true }
     );
     if (updatedUser) {
-      res.cookie("token", "", {
+      res.cookie("AmazonClonecookie", "", {
         expires: new Date(0),
         path: "/",
         secure: true,
       });
-      res.status(201).send("Logout successful");
+      res.status(201).json({ message: "Logout successful" });
     } else {
-      res.status(500).send("Failed to update user with new token");
+      res.status(500).send({ message: "Failed to update user with new token" });
     }
   } catch (error) {
     console.error(error);
-    res.status(500).send("Internal server error");
+    res.status(500).send({ message: "Internal server error" });
   }
 });
 
