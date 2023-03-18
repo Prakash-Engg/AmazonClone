@@ -19,7 +19,7 @@ app.use(express.json());
 app.use(cookieParser(""));
 app.use(
   cors({
-    origin: "https://helpful-pie-15926d.netlify.app",
+    origin: "https://mellow-swan-5d2d33.netlify.app",
     methods: ["PUT", "GET", "DELETE", "POST"],
     credentials: true,
     allowedHeaders: ["Content-Type", "Authorization"],
@@ -29,7 +29,7 @@ app.use(
 app.use((req, res, next) => {
   res.setHeader(
     "Access-Control-Allow-Origin",
-    "https://helpful-pie-15926d.netlify.app"
+    "https://mellow-swan-5d2d33.netlify.app"
   );
   next();
 });
