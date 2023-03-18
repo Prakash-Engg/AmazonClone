@@ -19,7 +19,7 @@ app.use(express.json());
 app.use(cookieParser(""));
 app.use(
   cors({
-    origin: "https://mellow-swan-5d2d33.netlify.app",
+    origin: "https://friendly-moonbeam-40bf8a.netlify.app",
     methods: ["PUT", "GET", "DELETE", "POST"],
     credentials: true,
     allowedHeaders: ["Content-Type", "Authorization"],
@@ -29,7 +29,7 @@ app.use(
 app.use((req, res, next) => {
   res.setHeader(
     "Access-Control-Allow-Origin",
-    "https://mellow-swan-5d2d33.netlify.app"
+    "https://friendly-moonbeam-40bf8a.netlify.app"
   );
   next();
 });
