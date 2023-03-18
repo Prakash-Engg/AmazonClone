@@ -19,7 +19,7 @@ app.use(express.json());
 app.use(cookieParser(""));
 app.use(
   cors({
-    origin: "https://steady-wisp-5a7742.netlify.app",
+    origin: "https://aquamarine-cat-62a40d.netlify.app",
     methods: ["PUT", "GET", "DELETE", "POST"],
     credentials: true,
     allowedHeaders: ["Content-Type", "Authorization"],
@@ -29,7 +29,7 @@ app.use(
 app.use((req, res, next) => {
   res.setHeader(
     "Access-Control-Allow-Origin",
-    "https://steady-wisp-5a7742.netlify.app"
+    "https://aquamarine-cat-62a40d.netlify.app"
   );
   next();
 });
