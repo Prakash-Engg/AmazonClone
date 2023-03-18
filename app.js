@@ -19,7 +19,7 @@ app.use(express.json());
 app.use(cookieParser(""));
 app.use(
   cors({
-    origin: "https://friendly-moonbeam-40bf8a.netlify.app",
+    origin: "https://boisterous-parfait-5ea54f.netlify.app",
     methods: ["PUT", "GET", "DELETE", "POST"],
     credentials: true,
     allowedHeaders: ["Content-Type", "Authorization"],
@@ -29,7 +29,7 @@ app.use(
 app.use((req, res, next) => {
   res.setHeader(
     "Access-Control-Allow-Origin",
-    "https://friendly-moonbeam-40bf8a.netlify.app"
+    "https://boisterous-parfait-5ea54f.netlify.app"
   );
   next();
 });
