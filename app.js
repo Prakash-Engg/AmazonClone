@@ -19,7 +19,7 @@ app.use(express.json());
 app.use(cookieParser(""));
 app.use(
   cors({
-    origin: "https://brilliant-tartufo-d28eae.netlify.app",
+    origin: "https://helpful-pie-15926d.netlify.app",
     methods: ["PUT", "GET", "DELETE", "POST"],
     credentials: true,
     allowedHeaders: ["Content-Type", "Authorization"],
@@ -29,7 +29,7 @@ app.use(
 app.use((req, res, next) => {
   res.setHeader(
     "Access-Control-Allow-Origin",
-    "https://brilliant-tartufo-d28eae.netlify.app"
+    "https://helpful-pie-15926d.netlify.app"
   );
   next();
 });
