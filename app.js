@@ -19,7 +19,7 @@ app.use(express.json());
 app.use(cookieParser(""));
 app.use(
   cors({
-    origin: "https://meek-yeot-50a2c0.netlify.app",
+    origin: "https://exquisite-meringue-3c89fc.netlify.app",
     methods: ["PUT", "GET", "DELETE", "POST"],
     credentials: true,
     allowedHeaders: ["Content-Type", "Authorization"],
@@ -29,7 +29,7 @@ app.use(
 app.use((req, res, next) => {
   res.setHeader(
     "Access-Control-Allow-Origin",
-    "https://meek-yeot-50a2c0.netlify.app"
+    "https://exquisite-meringue-3c89fc.netlify.app"
   );
   next();
 });
