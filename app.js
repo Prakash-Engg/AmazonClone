@@ -19,7 +19,7 @@ app.use(express.json());
 app.use(cookieParser(""));
 app.use(
   cors({
-    origin: "https://endearing-mandazi-ac5174.netlify.app",
+    origin: "https://amazonclone-ecom.netlify.app",
     methods: ["PUT", "GET", "DELETE", "POST"],
     credentials: true,
     allowedHeaders: ["Content-Type", "Authorization"],
@@ -29,7 +29,7 @@ app.use(
 app.use((req, res, next) => {
   res.setHeader(
     "Access-Control-Allow-Origin",
-    "https://endearing-mandazi-ac5174.netlify.app"
+    "https://amazonclone-ecom.netlify.app"
   );
   next();
 });
