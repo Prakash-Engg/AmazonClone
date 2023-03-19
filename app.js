@@ -19,7 +19,7 @@ app.use(express.json());
 app.use(cookieParser(""));
 app.use(
   cors({
-    origin: "https://leafy-sfogliatella-97c90a.netlify.app",
+    origin: "https://endearing-mandazi-ac5174.netlify.app",
     methods: ["PUT", "GET", "DELETE", "POST"],
     credentials: true,
     allowedHeaders: ["Content-Type", "Authorization"],
@@ -29,7 +29,7 @@ app.use(
 app.use((req, res, next) => {
   res.setHeader(
     "Access-Control-Allow-Origin",
-    "https://leafy-sfogliatella-97c90a.netlify.app"
+    "https://endearing-mandazi-ac5174.netlify.app"
   );
   next();
 });
