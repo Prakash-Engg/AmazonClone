@@ -19,7 +19,7 @@ app.use(express.json());
 app.use(cookieParser(""));
 app.use(
   cors({
-    origin: "https://amazonclone-ecom.netlify.app",
+    origin: "https://amazoncloneecom.netlify.app",
     methods: ["PUT", "GET", "DELETE", "POST"],
     credentials: true,
     allowedHeaders: ["Content-Type", "Authorization"],
@@ -29,7 +29,7 @@ app.use(
 app.use((req, res, next) => {
   res.setHeader(
     "Access-Control-Allow-Origin",
-    "https://amazonclone-ecom.netlify.app"
+    "https://amazoncloneecom.netlify.app"
   );
   next();
 });

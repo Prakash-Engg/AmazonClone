@@ -224,11 +224,7 @@ router.get("/logout", authenticate, async (req, res) => {
       { new: true }
     );
     if (updatedUser) {
-      res.cookie("AmazonClonecookie", "", {
-        expires: new Date(0),
-        path: "/",
-        secure: true,
-      });
+      res.clearCookie("AmazonClonecookie", { path: "/", secure: true });
       res.status(201).json({ message: "Logout successful" });
     } else {
       res.status(500).send({ message: "Failed to update user with new token" });
